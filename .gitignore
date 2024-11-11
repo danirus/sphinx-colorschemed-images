@@ -1,0 +1,8 @@
+dist/sphinx_colorschemed_images*
+dist/sphinx_colorschemed_images*
+js/coverage/
+tests/sample_prj_4/_build/
+tests/sample_prj_3/_build/
+tests/sample_prj_2/_build/
+tests/sample_prj_1/_build/
+sphinx_colorschemed_images/static/sphinx-colorschemed-images.js*
