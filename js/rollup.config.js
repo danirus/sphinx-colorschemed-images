@@ -8,19 +8,14 @@ const replace = require('@rollup/plugin-replace');
 const getBanner = require('./banner.js');
 
 const ESM = process.env.ESM === 'true';
-const UMD = process.env.UMD === 'true';
-const build_module = (ESM || UMD);
-const suffix = ESM ? "esm" : "umd";
 
 const input_module = path.resolve(__dirname, "src/main.js");
 const input_script = path.resolve(__dirname, "src/script.js");
 const output_module = path.resolve(
-  __dirname, `../dist/js/sphinx-colorschemed-images.${suffix}.js`
+  __dirname, `../dist/js/sphinx-colorschemed-images.esm.js`
 );
 const output_script = path.resolve(
-  __dirname,
-  '../sphinx_colorschemed_images/',
-  'static/sphinx-colorschemed-images.js'
+  __dirname, `../dist/js/sphinx-colorschemed-images.js`
 );
 
 const plugins = [
@@ -41,18 +36,18 @@ if (!ESM) {
 }
 
 const config = {
-  input: build_module ? input_module : input_script,
+  input: ESM ? input_module : input_script,
   output: {
     banner: getBanner(),
-    file: build_module ? output_module : output_script,
+    file: ESM ? output_module : output_script,
     format: ESM ? 'esm' : 'umd',
     generatedCode: 'es2015',
   },
   plugins
 };
 
-if (UMD) {
-  config.output.name = 'sphinx_colorschemed_images';
+if (!ESM) {
+  config.output.name = 'sphinx-colorschemed-images';
 }
 
 module.exports = config;

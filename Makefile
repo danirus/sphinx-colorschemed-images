@@ -14,9 +14,9 @@ js-tests:  ## Run JavaScript tests.
 
 build-ext:  ## Build Sphinx extension.
 	rm sphinx_colorschemed_images/static/*
-	npm run build-esm
-	npm run build-umd
 	npm run build-script
+	npm run build-module
+	cp dist/js/sphinx-colorschemed-images.js sphinx_colorschemed_images/static/
 	python -m build
 
 build-docs:  ## Create sphinx-colorschemed-images documentation.

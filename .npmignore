@@ -1,0 +1,11 @@
+ccsvg.sh
+coverage.svg
+dist/sphinx_colorschemed_images-*
+docs
+js/
+Makefile
+pyproject.toml
+sphinx_colorschemed_images/
+sphinx_colorschemed_images.egg-info
+tests/
+venv/
