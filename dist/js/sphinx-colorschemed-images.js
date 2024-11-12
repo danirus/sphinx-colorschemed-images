@@ -3,11 +3,10 @@
   * Copyright 2024 Daniela Rus Morales.
   * Licensed under MIT (https://github.com/danirus/sphinx-colorschemed-images/blob/main/LICENSE).
   */
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.sphinx_colorschemed_images = {}));
-})(this, (function (exports) { 'use strict';
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+})((function () { 'use strict';
 
   function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
@@ -106,9 +105,21 @@
     }
   };
 
-  exports.SphinxColorschemeImageHandler = SphinxColorschemeImageHandler;
-
-  Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+  function runWhenDOMContentLoaded(cb) {
+    if (document.readyState != 'loading') {
+      cb();
+    } else if (document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', cb);
+    } else {
+      document.attachEvent('onreadystatechange', function () {
+        if (document.readyState == 'complete') cb();
+      });
+    }
+  }
+  function addSphinxColorschemedImageHandler() {
+    return new SphinxColorschemeImageHandler();
+  }
+  runWhenDOMContentLoaded(addSphinxColorschemedImageHandler);
 
 }));
-//# sourceMappingURL=sphinx-colorschemed-images.umd.js.map
+//# sourceMappingURL=sphinx-colorschemed-images.js.map

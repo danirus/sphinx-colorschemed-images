@@ -13,8 +13,7 @@
   },
   "homepage": "https://github.com/danirus/sphinx-colorschemed-images",
   "scripts": {
-    "build-esm": "rollup --environment ESM:true --config js/rollup.config.js --sourcemap",
-    "build-umd": "rollup --environment UMD:true --config js/rollup.config.js --sourcemap",
+    "build-module": "rollup --environment ESM:true --config js/rollup.config.js --sourcemap",
     "build-script": "rollup --environment ESM:false --config js/rollup.config.js --sourcemap",
     "lint": "eslint js/src --cache --cache-location .cache/.eslintcache --report-unused-disable-directives",
     "lint-fix": "eslint js/src --cache --cache-location .cache/.eslintcache --fix",
