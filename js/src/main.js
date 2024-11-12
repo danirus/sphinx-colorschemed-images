@@ -12,7 +12,7 @@ export class SphinxColorschemeImageHandler {
       : true;
 
     const meta_prop = document.querySelector('meta[name="color-scheme"]');
-    let meta_schemes = (meta_prop != null) ? meta_prop.content : "";
+    let meta_schemes = (meta_prop == undefined) ? "" : meta_prop.content;
 
     if (meta_schemes.length > 0) {
       const schemes = meta_schemes.split(" ");

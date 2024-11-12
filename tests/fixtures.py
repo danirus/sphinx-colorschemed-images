@@ -1,8 +1,9 @@
-from io import StringIO
 import shutil
 import sys
+from collections.abc import Generator
+from io import StringIO
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any
 
 import pytest
 from sphinx.testing.util import SphinxTestApp
@@ -47,7 +48,9 @@ def test_app(do_app, sphinx_test_tempdir) -> Generator:
 
     def _test_app(**builder_params):
         # Copy test srcdir to test temporary directory sphinx_test_tempdir.
-        src_dir = copy_srcdir_to_tmpdir(builder_params["srcdir"], sphinx_test_tempdir)
+        src_dir = copy_srcdir_to_tmpdir(
+            builder_params["srcdir"], sphinx_test_tempdir
+        )
 
         _app = do_app(
             srcdir=src_dir,
@@ -77,6 +80,7 @@ def test_app(do_app, sphinx_test_tempdir) -> Generator:
 # successfully. It is just to test that the extension validates that
 # the value provided in csi_default_color_scheme is a member of the
 # list of color schemes provided in csi_color_schemes.
+
 
 @pytest.fixture(scope="module")
 def sample_prj2(test_app):

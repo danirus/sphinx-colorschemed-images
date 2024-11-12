@@ -13,7 +13,7 @@ const compat = new FlatCompat({
 });
 
 export default [{
-  ignores: ["build/*"],
+  ignores: ["build/*", "dist/js/*.js", "dist/js/*.js.map"],
 }, ...fixupConfigRules(compat.extends(
   "plugin:import/errors",
   "plugin:import/warnings",

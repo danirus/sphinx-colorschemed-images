@@ -21,7 +21,7 @@ describe('Image src attribute changes', () => {
     fixtureEl = getFixture();
 
     // Be sure that prefers-color-scheme matches when is 'dark'.
-    spyOn(window, 'matchMedia').and.callFake(
+    spyOn(globalThis, 'matchMedia').and.callFake(
       (media_query) => {
         const matches = media_query.includes('dark') ? true : false;
         return {
@@ -38,7 +38,7 @@ describe('Image src attribute changes', () => {
 
   it('Check that the src changes from light to dark URL', () => {
     // Be sure that the Image loads.
-    spyOn(window, 'Image').and.callFake(
+    spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
           src: '',
@@ -66,7 +66,7 @@ describe('Image src attribute changes', () => {
 
   it('Check that the src changes from light to dark URL, immediately', () => {
     // Be sure that the Image loads.
-    spyOn(window, 'Image').and.callFake(
+    spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
           complete: true,  // This will change the image immediately.
@@ -93,7 +93,7 @@ describe('Image src attribute changes', () => {
 
   it('Check that the src does not change if it does not load', () => {
     // Be sure that the Image loads.
-    spyOn(window, 'Image').and.callFake(
+    spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
           src: '',
@@ -129,7 +129,7 @@ describe('Image src attribute changes when change event is triggered', () => {
     fixtureEl = getFixture();
 
     // Be sure that prefers-color-scheme matches when is 'dark'.
-    spyOn(window, 'matchMedia').and.callFake(
+    spyOn(globalThis, 'matchMedia').and.callFake(
       (media_query) => {
         const matches = media_query.includes('dark') ? true : false;
         return {
@@ -143,7 +143,7 @@ describe('Image src attribute changes when change event is triggered', () => {
       }
     );
 
-    spyOn(window, 'Image').and.callFake(
+    spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
           src: '',
@@ -202,7 +202,7 @@ describe('Color schemes loaded from meta tag', () => {
     fixtureEl = getFixture();
 
     // Be sure that prefers-color-scheme matches when is 'dark'.
-    spyOn(window, 'matchMedia').and.callFake(
+    spyOn(globalThis, 'matchMedia').and.callFake(
       (media_query) => {
         const match = media_query.match(schemeRE);
         if (match) {
@@ -236,7 +236,7 @@ describe('Color schemes loaded from meta tag', () => {
 describe('Initialize with options auto=true and auto=false', () => {
   beforeAll(() => {
     // Be sure that prefers-color-scheme matches when is 'dark'.
-    spyOn(window, 'matchMedia').and.callFake(
+    spyOn(globalThis, 'matchMedia').and.callFake(
       (media_query) => {
         return {
           matches: false,

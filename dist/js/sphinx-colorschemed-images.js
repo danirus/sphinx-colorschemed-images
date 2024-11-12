@@ -74,7 +74,7 @@
     // update images accordingly.
     this._auto = options.hasOwnProperty('auto') ? options['auto'] === true : true;
     var meta_prop = document.querySelector('meta[name="color-scheme"]');
-    var meta_schemes = meta_prop != null ? meta_prop.content : "";
+    var meta_schemes = meta_prop == undefined ? "" : meta_prop.content;
     if (meta_schemes.length > 0) {
       var schemes = meta_schemes.split(" ");
       for (var _iterator2 = _createForOfIteratorHelperLoose(schemes), _step2; !(_step2 = _iterator2()).done;) {

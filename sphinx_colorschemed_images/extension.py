@@ -1,26 +1,23 @@
 import os
-import os.path
-from glob import glob
 from pathlib import Path
 
 from docutils import nodes
 from docutils.parsers.rst.directives.images import Figure, Image
 from docutils.utils import relative_path
 from sphinx.environment.adapters.asset import ImageAdapter
-from sphinx.errors import SphinxError
 from sphinx.locale import __
 from sphinx.util import logging
 from sphinx.util.display import status_iterator
 from sphinx.util.images import guess_mimetype
 from sphinx.util.osutil import copyfile, ensuredir
 
-from .exceptions import CSIExtensionException
-from .translator import visit_colorschemed_image, depart_colorschemed_image
+from .exceptions import CSIExtensionError
+from .translator import depart_colorschemed_image, visit_colorschemed_image
 
 logger = logging.getLogger(__name__)
 
 
-class colorschemed_image(nodes.image):
+class colorschemed_image(nodes.image):  # noqa: N801
     pass
 
 
@@ -33,9 +30,9 @@ class ColorschemedMixin:
         default_color_scheme = config.csi_default_color_scheme
 
         for color_scheme, img_path in image_paths.items():
-            options[f'data-alt-src-color-scheme-{color_scheme}'] = img_path
+            options[f"data-alt-src-color-scheme-{color_scheme}"] = img_path
 
-        options['uri'] = image_paths.get(default_color_scheme)
+        options["uri"] = image_paths.get(default_color_scheme)
         return colorschemed_image(node.rawsource, **options)
 
 
@@ -89,45 +86,43 @@ class ColorschemedFigure(Figure, ColorschemedMixin):
 def get_image_paths(env, node):
     existing_img_paths = {}
     calculated_img_paths = {}
-    root, ext = os.path.splitext(node['uri'])
-    dirname = os.path.dirname(root)
-    docpath = os.path.dirname(env.docname)
-
-    for color_scheme in env.app.config.csi_color_schemes:
-        try:
+    node_uri = Path(node["uri"])
+    try:
+        for color_scheme in env.app.config.csi_color_schemes:
             img_path = env.app.config.csi_image_path_pattern.format(
-                root=root,
-                ext=ext,
-                path=dirname and dirname,
-                basename=os.path.basename(root),
-                docpath=docpath and docpath,
+                root=str(node_uri.parent / node_uri.stem),
+                ext=node_uri.suffix,
+                path=str(node_uri.parent),
+                basename=node_uri.stem,
+                docpath=str(Path(env.docname)),
                 language=env.app.config.language,
                 colorscheme=color_scheme,
             )
             calculated_img_paths[color_scheme] = img_path
-        except KeyError as exc:
-            msg = (
-                'Invalid csi_image_path_pattern: "'
-                f'{env.app.config.csi_image_path_pattern}" - {exc!r}'
-            )
-            raise CSIExtensionException(msg) from exc
-        else:
             _, full_img_path = env.relfn2path(img_path, env.docname)
             candidates = collect_candidates(env.app, full_img_path, node)
+
             for img_path in candidates.values():
-                full_img_path = os.path.join(env.app.srcdir, img_path)
+                full_img_path = str(Path(env.app.srcdir) / img_path)
                 if not os.access(full_img_path, os.R_OK):  # pragma: no cover
                     logger.warning(
-                        __('image file not readable: %s'),
+                        __("image file not readable: %s"),
                         img_path,
                         location=node,
-                        type='image',
-                        subtype='not_readable',
+                        type="image",
+                        subtype="not_readable",
                     )
                     continue
                 existing_img_paths[color_scheme] = img_path
 
-    if not hasattr(env, 'colorschemed_images'):
+    except KeyError as exc:
+        msg = (
+            'Invalid csi_image_path_pattern: "'
+            f'{env.app.config.csi_image_path_pattern}" - {exc!r}'
+        )
+        raise CSIExtensionError(msg) from exc
+
+    if not hasattr(env, "colorschemed_images"):
         env.colorschemed_images = []
 
     for color_scheme, img_path in existing_img_paths.items():
@@ -136,12 +131,11 @@ def get_image_paths(env, node):
 
     if len(existing_img_paths) < len(calculated_img_paths):
         not_found = [
-            k for k in calculated_img_paths.keys()
-            if k not in existing_img_paths
+            k for k in calculated_img_paths if k not in existing_img_paths
         ]
         for k in not_found:
             logger.warning(
-                __(f"image not found: %s"),
+                __("image not found: %s"),
                 calculated_img_paths[k],
                 location=node,
             )
@@ -154,25 +148,24 @@ def get_image_paths(env, node):
 def collect_candidates(env, img_path, node):
     globbed = {}
     candidates = {}
-    for filename in glob(img_path):
-        new_img_path = relative_path(
-            os.path.join(env.srcdir, 'dummy'), filename
-        )
+    img_path = Path(img_path)
+    for filename in img_path.parent.glob(img_path.name):
+        new_img_path = relative_path(str(Path(env.srcdir) / "dummy"), filename)
         try:
             mimetype = guess_mimetype(filename)
             if mimetype is None:  # pragma: no cover
-                basename, suffix = os.path.splitext(filename)
-                mimetype = 'image/x-' + suffix[1:]
+                suffix = Path(filename).suffix
+                mimetype = "image/x-" + suffix[1:]
             if mimetype not in candidates:
                 globbed.setdefault(mimetype, []).append(new_img_path)
         except OSError as err:  # pragma: no cover
             logger.warning(
-                __('image file %s not readable: %s'),
+                __("image file %s not readable: %s"),
                 filename,
                 err,
                 location=node,
-                type='image',
-                subtype='not_readable',
+                type="image",
+                subtype="not_readable",
             )
 
     for key, files in globbed.items():
@@ -193,8 +186,8 @@ def copy_colorschemed_images(app, *args):
 
     for src in status_iterator(
         images,
-        __('copying colorschemed_images... '),
-        'brown',
+        __("copying colorschemed_images... "),
+        "brown",
         len(images),
         app.verbosity,
         stringify_func=stringify_func,
@@ -202,9 +195,7 @@ def copy_colorschemed_images(app, *args):
         dest = images[src]
         try:
             copyfile(
-                app.srcdir / src,
-                app.outdir / images_dir / dest,
-                force=True
+                app.srcdir / src, app.outdir / images_dir / dest, force=True
             )
         except Exception as err:  # pragma: no cover
             logger.warning(
@@ -221,8 +212,8 @@ def extension_builder_inited(app):
         colorschemed_image,
         html=(visit_colorschemed_image, depart_colorschemed_image),
     )
-    app.add_directive('cs_image', ColorschemedImage)
-    app.add_directive('cs_figure', ColorschemedFigure)
+    app.add_directive("cs_image", ColorschemedImage)
+    app.add_directive("cs_figure", ColorschemedFigure)
 
     # Assert that the setting csi_default_color_scheme, given by the user
     # in the conf.py, is also part of the list of color schemes given by
@@ -233,7 +224,7 @@ def extension_builder_inited(app):
     color_schemes = app.env.config.csi_color_schemes
 
     if default_color_scheme not in color_schemes:
-       raise CSIExtensionException(
-           f"Setting hl(csi_default_color_scheme) '{default_color_scheme}' is"
-           f" not contained in setting hl(csi_color_schemes) {color_schemes}."
+        raise CSIExtensionError(
+            f"Setting hl(csi_default_color_scheme) '{default_color_scheme}' is"
+            f" not contained in setting hl(csi_color_schemes) {color_schemes}."
         )
