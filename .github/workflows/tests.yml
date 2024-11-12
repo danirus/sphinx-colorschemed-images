@@ -8,7 +8,7 @@ on:
 
 env:
   NODE: 20
-  FORCE_COLOR: 2
+  FORCE_COLOR: true
   PYTHON: 3.13
 
 permissions:
