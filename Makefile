@@ -2,17 +2,25 @@
 
 .PHONY: coverage help
 
+clean:  ## Remove build files.
+	rm -rf js/coverage
+	rm -rf dist/js
+	rm -rf sphinx_colorschemed_images/__pycache__
+	rm -rf sphinx_colorschemed_images.egg-info
+
+lint:  ## Run pre-commit hook checks.
+	pre-commit run --all-files --show-diff-on-failure
+
 py-tests:  ## Run Python tests with coverage.
 	coverage erase
-	coverage run --source=sphinx_colorschemed_images \
-		--omit=*migrations*,*tests* -m pytest -ra
+	coverage run --source=sphinx_colorschemed_images -m pytest -ra
 	coverage report -m
 	@sh ./ccsvg.sh ||:
 
 js-tests:  ## Run JavaScript tests.
 	npm run test
 
-build-ext:  ## Build Sphinx extension.
+build-ext:  clean  ## Build Sphinx extension.
 	rm sphinx_colorschemed_images/static/*
 	npm run build-script
 	npm run build-module

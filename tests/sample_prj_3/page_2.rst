@@ -50,4 +50,3 @@ The image here has the URI ``img/balloon.*``. The code:
 Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus pretium blandit tortor vitae efficitur. Vestibulum eget venenatis eros. Cras euismod eget justo id sodales. Vestibulum a ullamcorper turpis. Suspendisse potenti. Curabitur ac condimentum dui.
 
 Donec mollis leo lorem, vel dictum nisi efficitur id. Praesent mollis vel ante efficitur placerat. Nunc nec eros ac ex laoreet tristique non ac neque. Cras felis elit, eleifend eget nisl aliquet, maximus maximus justo.
-

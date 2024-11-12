@@ -6,26 +6,26 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
 });
 
 export default [{
-    ignores: ["coverage/*"],
+  ignores: ["coverage/*"],
 }, ...compat.extends("../.eslintrc.json"), {
-    languageOptions: {
-        globals: {},
-        ecmaVersion: "latest",
-        sourceType: "module",
-    },
+  languageOptions: {
+    globals: {},
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
 }, {
-    files: ["./src/**/*.js"],
+  files: ["./src/**/*.js"],
 
-    rules: {
-        "import/extensions": [2, {
-            js: "always",
-            json: "always",
-        }],
-    },
+  rules: {
+    "import/extensions": [2, {
+      js: "always",
+      json: "always",
+    }],
+  },
 }];

@@ -6,27 +6,25 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Sample Project 1'
-copyright = '2024, copyright'
-author = 'Daniela Rus Morales'
+project = "Sample Project 1"
+copyright = "2024, copyright"
+author = "Daniela Rus Morales"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx_colorschemed_images',
+    "sphinx_colorschemed_images",
 ]
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
+templates_path = ["_templates"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_nefertiti'
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # - Settings for the Sphinx Colorschemed Images extension --------------------
 
