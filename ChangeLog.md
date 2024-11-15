@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.2] - 2024-11-15
+
+- Fix: Add sphinx_colorschemed_images/static directory to Python distribution.
+
 ## [0.1.1] - 2024-11-15
 
 - Enhancement: When switching images for directive `cs_figure`, change as well the `href` attribute of the anchor used inside the `<figure>` element that wraps the image.

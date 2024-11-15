@@ -24,7 +24,7 @@ build-ext:  clean  ## Build Sphinx extension.
 	rm -f sphinx_colorschemed_images/static/*
 	npm run build-script
 	npm run build-module
-	mkdir sphinx_colorschemed_images/static/
+	mkdir -p sphinx_colorschemed_images/static/
 	cp dist/js/sphinx-colorschemed-images.js sphinx_colorschemed_images/static/
 	python -m build
 

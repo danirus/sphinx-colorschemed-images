@@ -43,9 +43,6 @@ packages = ['sphinx_colorschemed_images']
 [tool.setuptools.dynamic]
 version = {attr = "sphinx_colorschemed_images.__version__"}
 
-[tool.setuptools.package-data]
-sphinx_colorschemed_images = ["README.md"]
-
 [tool.ruff]
 exclude = [
     "docs/",
