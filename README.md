@@ -50,7 +50,7 @@ Build your Sphinx project and serve it. You should see either the image for the 
 
 When using the extension Sphinx adds a script to your HTML output, `sphinx-colorschemed-images.js`, that listens for changes on the user's preferred color-scheme and switches between the images accordingly. It works in all Sphinx themes regardless of whether they have support for light/dark color schemes.
 
-If you have your own theme and it offers the user control over the color-scheme, you can use the NPM package [sphinx-colorschemed-images](https://www.npmjs.com/package/sphinx-colorschemed-images) and its class `SphinxColorschemeImageHandler` when building your own plugig.
+If you have your own theme and it offers the user control over the color-scheme, you can use the NPM package [sphinx-colorschemed-images](https://www.npmjs.com/package/sphinx-colorschemed-images) and its class `SphinxColorschemeImageHandler` when building your own plugin.
 
 The source code is rather small, so it is better to look into [it](https://raw.githubusercontent.com/danirus/sphinx-colorschemed-images/refs/heads/main/js/src/main.js) than to explain it here. If your theme already listens for changes in `prefers-color-scheme`, pass `{auto: false}` to the constructor, to avoid adding the listeners again. To switch between *light* and *dark* images, call the `activate` method with either `light` or `dark`.
 
