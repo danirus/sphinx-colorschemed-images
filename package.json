@@ -1,7 +1,11 @@
 {
   "name": "sphinx-colorschemed-images",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Include color-scheme aware images in Sphinx projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danirus/sphinx-colorschemed-images"
+  },
   "engines": {
     "node": ">=20"
   },

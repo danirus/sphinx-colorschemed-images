@@ -31,7 +31,6 @@ export class SphinxColorschemeImageHandler {
       if (this._auto === true) {
         q.addEventListener('change', e => {
           if (e.matches) {
-            console.log('event:', e);
             this.activate(scheme);
           }
         });
@@ -55,6 +54,16 @@ export class SphinxColorschemeImageHandler {
       });
       if (new_img.complete) {
         img.src = new_img.src;
+      }
+
+      // Check whether the image is inside a <figure>.
+      debugger;
+      const figure = img.closest('figure');
+      if (figure != undefined) {
+        const anchor = figure.querySelector('a');
+        if (anchor.getAttribute('href') !== new_src) {
+          anchor.href = new_src;
+        }
       }
     }
   }

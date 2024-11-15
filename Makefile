@@ -35,7 +35,7 @@ serve-lcov:  js-tests  ## Web server for content from lcov-report directory.
 	python -m http.server -d js/coverage/lcov-report 8193
 
 serve-docs:  build-docs  ## Web server for the sphinx-nefertiti documentation.
-	python -m http.server -d docs/build/html 8194
+	python -m http.server -d docs/_build/html 8195
 
 help: ## Show help message
 	@IFS=$$'\n' ; \

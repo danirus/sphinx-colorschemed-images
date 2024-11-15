@@ -65,7 +65,7 @@ describe('Image src attribute changes', () => {
   });
 
   it('Check that the src changes from light to dark URL, immediately', () => {
-    // Be sure that the Image loads.
+    // Provide 'complete' attribute for Image.
     spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
@@ -92,7 +92,7 @@ describe('Image src attribute changes', () => {
   });
 
   it('Check that the src does not change if it does not load', () => {
-    // Be sure that the Image loads.
+    // Be sure that the Image does NOT load.
     spyOn(globalThis, 'Image').and.callFake(
       () => {
         return {
@@ -102,7 +102,7 @@ describe('Image src attribute changes', () => {
           }
         }
       }
-    )
+    );
 
     fixtureEl.innerHTML = template_1.join('');
 
@@ -135,7 +135,6 @@ describe('Image src attribute changes when change event is triggered', () => {
         return {
           matches,    // prefers-color-scheme: dark
           addEventListener: (evt_name, evt_obj) => {
-            console.log("setting up changeSchemeCallback");
             if (matches)
               changeSchemeCallback = evt_obj;
           },
@@ -251,13 +250,92 @@ describe('Initialize with options auto=true and auto=false', () => {
     expect(hdl._mediaqs.length).toEqual(2);
   });
 
-  it('Check that eventListends have not been added to _mediaqs', () => {
+  it('Check that eventListeners have not been added to _mediaqs', () => {
     const hdl = new SphinxColorschemeImageHandler({auto: false});
     expect(hdl._mediaqs.length).toEqual(0);
   });
 
-  it('Check that it is auto is true by default', () => {
+  it('Check, when auto is true, that media queries are added', () => {
     const hdl = new SphinxColorschemeImageHandler();
     expect(hdl._mediaqs.length).toEqual(2);  // Only if auto is true.
+  });
+});
+
+
+// --------------------------------------------------------------------
+const template_3 = [
+  '<div>',
+  '  <figure class="align-right" id="id3">',
+  '    <a class="reference internal image-reference"',
+  '       href="peace.light.png">',
+  '      <img alt="An icon for peace"',
+  '           data-alt-src-color-scheme-dark="peace.dark.png"',
+  '           data-alt-src-color-scheme-light="peace.light.png"',
+  '           src="peace.light.png" width="200">',
+  '    </a>',
+  '    <figcaption>',
+  '      <p>',
+  '        <span class="caption-text">The caption of the figure.</span>',
+  '        <a class="headerlink" href="#id3" title="Link to this image">¶</a>',
+  '      </p>',
+  '    </figcaption>',
+  '  </figure>',
+  '</div>',
+];
+
+describe('Image src changes, and href inside figure too', () => {
+  let fixtureEl;
+
+  beforeAll(() => {
+    fixtureEl = getFixture();
+
+    // Be sure that prefers-color-scheme matches when is 'dark'.
+    // Be sure that prefers-color-scheme matches when is 'dark'.
+    spyOn(globalThis, 'matchMedia').and.callFake(
+      (media_query) => {
+        const matches = media_query.includes('dark') ? true : false;
+        return {
+          matches,    // prefers-color-scheme: dark
+          addEventListener: (evt_name, evt_obj) => {},
+        };
+      }
+    );
+
+    // Be sure that the Image loads.
+    spyOn(globalThis, 'Image').and.callFake(
+      () => {
+        return {
+          src: '',
+          addEventListener: (evt_name, evt_cb) => {
+            if (evt_name === 'load') evt_cb();
+          }
+        }
+      }
+    )
+  });
+
+  afterEach(() => {
+    clearFixture();
+  });
+
+  it('Check that the img src changes, and href inside figure too', () => {
+    fixtureEl.innerHTML = template_3.join('');
+
+    // When loading the template the 'src' attribute of
+    // the image corresponds to the light version of it.
+    let img = document.querySelector('img');
+    expect(img.getAttribute('src')).toEqual('peace.light.png');
+
+    new SphinxColorschemeImageHandler({auto: false});
+
+    // After SphinxColorschemeImageHandler is used,
+    // the image has switch to the dark theme version.
+    img = document.querySelector('img');
+    expect(img.getAttribute('src')).toEqual('peace.dark.png');
+
+    // Get the enclosing <figure>.
+    const figure = img.closest('figure');
+    const anchor = figure.querySelector('a');
+    expect(anchor.getAttribute('href')).toEqual('peace.dark.png');
   });
 });
