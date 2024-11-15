@@ -2,7 +2,7 @@
 
 from .extension import copy_colorschemed_images, extension_builder_inited
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def setup(app) -> dict:
@@ -11,12 +11,10 @@ def setup(app) -> dict:
     app.add_config_value(
         "csi_image_path_pattern", "{path}/{basename}.{colorscheme}{ext}", "html"
     )
-    # app.add_config_value("csi_include_js_script", True, "html")
+    app.add_config_value("csi_add_script_to_html_output", True, "html")
 
     app.connect("builder-inited", extension_builder_inited)
     app.connect("build-finished", copy_colorschemed_images)
-
-    app.add_js_file("sphinx-colorschemed-images.js")
 
     return {
         "version": __version__,

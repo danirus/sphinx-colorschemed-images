@@ -192,6 +192,7 @@ def copy_colorschemed_images(app, *args):
         app.verbosity,
         stringify_func=stringify_func,
     ):
+        # import ipdb; ipdb.set_trace()
         dest = images[src]
         try:
             copyfile(
@@ -222,6 +223,9 @@ def extension_builder_inited(app):
     # include_js_script = app.env.config.csi_include_js_script
     default_color_scheme = app.env.config.csi_default_color_scheme
     color_schemes = app.env.config.csi_color_schemes
+
+    if app.config.csi_add_script_to_html_output:
+        app.add_js_file("sphinx-colorschemed-images.js")
 
     if default_color_scheme not in color_schemes:
         raise CSIExtensionError(

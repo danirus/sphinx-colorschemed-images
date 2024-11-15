@@ -1,0 +1,46 @@
+name: publish-py
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  FORCE_COLOR: true
+  NODE: 20
+  PYTHON: 3.13
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+            node-version: "${{ env.NODE }}"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - uses: actions/setup-python@v5
+        with:
+            python-version: "${{ env.PYTHON }}"
+
+      - name: Install build
+        run: pip install build
+
+      - run: npm install
+      - run: make build-ext
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1.8
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
