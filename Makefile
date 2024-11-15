@@ -21,7 +21,7 @@ js-tests:  ## Run JavaScript tests.
 	npm run test
 
 build-ext:  clean  ## Build Sphinx extension.
-	rm sphinx_colorschemed_images/static/*
+	rm -f sphinx_colorschemed_images/static/*
 	npm run build-script
 	npm run build-module
 	cp dist/js/sphinx-colorschemed-images.js sphinx_colorschemed_images/static/
