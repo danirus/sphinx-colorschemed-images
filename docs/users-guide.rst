@@ -224,6 +224,8 @@ Produces the following ``<img>`` tag:
 
 Switch the color scheme by using the selector at the top right of the header, or change it in your operating system settings. The balloon image will switch automatically between **light** and **dark** color-schemes.
 
+The ``href`` attribute of the anchor wrapped inside the ``<figure>`` is also updated to match the image displayed. Clicking on the image in the right side should load the image that is displayed when switching color schemes.
+
 
 Extension's settings
 ********************

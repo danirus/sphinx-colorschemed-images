@@ -1,9 +1,9 @@
-elefanto_pytest_plugins = [
+pytest_plugins = [
     "sphinx.testing.fixtures",
     "tests.fixtures",
 ]
 
 
 def pytest_configure(config):
-    for plugin_module in elefanto_pytest_plugins:
+    for plugin_module in pytest_plugins:
         config.pluginmanager.import_plugin(plugin_module)
