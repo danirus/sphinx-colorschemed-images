@@ -38,8 +38,8 @@ today_fmt = '%A %d. %B %Y, %H:%M'
 html_theme = "sphinx_nefertiti"
 
 html_theme = 'sphinx_nefertiti'
-html_static_path = ['_static']
-html_favicon = "_static/diamond-half.svg"
+html_static_path = ['static']
+html_favicon = "static/diamond-half.svg"
 
 html_theme_options = {
     "documentation_font": "Open Sans",

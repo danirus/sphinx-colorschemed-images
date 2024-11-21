@@ -32,7 +32,9 @@ class ColorschemedMixin:
         for color_scheme, img_path in image_paths.items():
             options[f"data-alt-src-color-scheme-{color_scheme}"] = img_path
 
-        options["uri"] = image_paths.get(default_color_scheme)
+        parent = Path(options["uri"]).parent
+        filename = Path(image_paths.get(default_color_scheme)).name
+        options["uri"] = str(parent / filename)
         return colorschemed_image(node.rawsource, **options)
 
 
