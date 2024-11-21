@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.3] - 2024-11-21
+
+- Fix: Image node URI must be relative to path given in the document instead of path calculated by ``get_image_paths``.
+
 ## [0.1.2] - 2024-11-15
 
 - Fix: Add sphinx_colorschemed_images/static directory to Python distribution.
