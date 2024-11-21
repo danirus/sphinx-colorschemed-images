@@ -2,7 +2,7 @@
 
 from .extension import copy_colorschemed_images, extension_builder_inited
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 def setup(app) -> dict:
