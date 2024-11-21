@@ -3,7 +3,7 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from importlib.metadata import version as _version
+import sphinx_colorschemed_images
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -11,7 +11,13 @@ from importlib.metadata import version as _version
 project = 'sphinx-colorschemed-images'
 copyright = '2024, Daniela Rus Morales'
 author = 'Daniela Rus Morales'
-release = _version("sphinx-colorschemed-images")
+
+release_pattern_url = (
+    "https://sphinx-colorschemed-images.readthedocs.io/en/{release}/"
+)
+
+release = sphinx_colorschemed_images.__version__
+releases = [release,]
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -38,8 +44,8 @@ today_fmt = '%A %d. %B %Y, %H:%M'
 html_theme = "sphinx_nefertiti"
 
 html_theme = 'sphinx_nefertiti'
-html_static_path = ['_static']
-html_favicon = "_static/diamond-half.svg"
+html_static_path = ['static']
+html_favicon = "static/diamond-half.svg"
 
 html_theme_options = {
     "documentation_font": "Open Sans",
@@ -60,6 +66,10 @@ html_theme_options = {
     "repository_name": "sphinx-colorschemed-images",
 
     "current_version": f"v{release}",
+    "versions": [
+        ("v%s" % item, release_pattern_url.format(release=item))
+        for item in releases
+    ],
 
     "footer_links": [
         {

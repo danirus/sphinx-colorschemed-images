@@ -1,5 +1,5 @@
 /*!
-  * sphinx-colorschemed-images v0.1.2 (https://github.com/danirus/sphinx-colorschemed-images).
+  * sphinx-colorschemed-images v0.1.3 (https://github.com/danirus/sphinx-colorschemed-images).
   * Copyright 2024 Daniela Rus Morales.
   * Licensed under MIT (https://github.com/danirus/sphinx-colorschemed-images/blob/main/LICENSE).
   */
