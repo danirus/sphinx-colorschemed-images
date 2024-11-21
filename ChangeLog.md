@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.4] - 2024-11-21
+
+- Image wrapping anchor requires to get its `href` attribute updated when switching color schemes. Add test case. Update docs.
+
 ## [0.1.3] - 2024-11-21
 
 - Fix: Image node URI must be relative to path given in the document instead of path calculated by ``get_image_paths``.

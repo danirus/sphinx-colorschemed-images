@@ -57,13 +57,16 @@ var SphinxColorschemeImageHandler = function SphinxColorschemeImageHandler(optio
       }
 
       // Check whether the image is inside a <figure>.
-      debugger;
       var figure = img.closest('figure');
       if (figure != undefined) {
         var anchor = figure.querySelector('a');
         if (anchor.getAttribute('href') !== new_src) {
           anchor.href = new_src;
         }
+      } else if (img.parentElement.tagName == "A" && img.parentElement.getAttribute("href") !== new_src) {
+        var parent = img.parentElement;
+        parent.href = img.getAttribute(data_att);
+        console.log("the new anchor's href:", parent.href);
       }
     };
     for (var _iterator = _createForOfIteratorHelperLoose(images), _step; !(_step = _iterator()).done;) {

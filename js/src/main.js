@@ -57,13 +57,19 @@ export class SphinxColorschemeImageHandler {
       }
 
       // Check whether the image is inside a <figure>.
-      debugger;
       const figure = img.closest('figure');
       if (figure != undefined) {
         const anchor = figure.querySelector('a');
         if (anchor.getAttribute('href') !== new_src) {
           anchor.href = new_src;
         }
+      } else if (
+        (img.parentElement.tagName == "A")
+        && img.parentElement.getAttribute("href") !== new_src
+      ) {
+        const parent = img.parentElement;
+        parent.href = img.getAttribute(data_att);
+        console.log("the new anchor's href:", parent.href);
       }
     }
   }

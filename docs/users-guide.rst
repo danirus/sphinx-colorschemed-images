@@ -152,10 +152,13 @@ Produces the following ``<img>`` tag:
 
 .. cs_image:: img/balloon.png
    :alt: A balloon icon
-   :align: center
+   :align: right
    :width: 200
 
 Switch the color scheme by using the selector at the top right of the header, or change it in your operating system settings. The balloon image will switch automatically between **light** and **dark** color-schemes.
+
+The ``href`` attribute of the anchor that wraps the ``<img>`` is also updated, so clicking on it will load the image matching the color scheme.
+
 
 The ``cs_figure`` directive
 ***************************
