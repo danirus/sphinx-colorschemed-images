@@ -265,31 +265,24 @@ describe('Initialize with options auto=true and auto=false', () => {
 // --------------------------------------------------------------------
 const template_3 = [
   '<div>',
-  '  <figure class="align-right" id="id3">',
-  '    <a class="reference internal image-reference"',
-  '       href="peace.light.png">',
-  '      <img alt="An icon for peace"',
-  '           data-alt-src-color-scheme-dark="peace.dark.png"',
-  '           data-alt-src-color-scheme-light="peace.light.png"',
-  '           src="peace.light.png" width="200">',
-  '    </a>',
-  '    <figcaption>',
-  '      <p>',
-  '        <span class="caption-text">The caption of the figure.</span>',
-  '        <a class="headerlink" href="#id3" title="Link to this image">¶</a>',
-  '      </p>',
-  '    </figcaption>',
-  '  </figure>',
+  '  <a class="border-radius-2 reference internal image-reference"',
+  '     href="peace.light.png">',
+  '    <img alt="Current version with label 3.13"',
+  '         class="align-right border-radius-2"',
+  '         data-alt-src-color-scheme-dark="peace.dark.png"',
+  '         data-alt-src-color-scheme-light="peace.light.png"',
+  '         src="peace.light.png"',
+  '         width="250">',
+  '  </a>',
   '</div>',
 ];
 
-describe('Image src changes, and href inside figure too', () => {
+describe("Image's src and anchor's href changes in cs_image", () => {
   let fixtureEl;
 
   beforeAll(() => {
     fixtureEl = getFixture();
 
-    // Be sure that prefers-color-scheme matches when is 'dark'.
     // Be sure that prefers-color-scheme matches when is 'dark'.
     spyOn(globalThis, 'matchMedia').and.callFake(
       (media_query) => {
@@ -311,15 +304,92 @@ describe('Image src changes, and href inside figure too', () => {
           }
         }
       }
-    )
+    );
   });
 
   afterEach(() => {
     clearFixture();
   });
 
-  it('Check that the img src changes, and href inside figure too', () => {
+  it("Image's src and anchor's href changes in cs_image", () => {
     fixtureEl.innerHTML = template_3.join('');
+
+    // When loading the template the 'src' attribute of
+    // the image corresponds to the light version of it.
+    let img = document.querySelector('img');
+    expect(img.getAttribute('src')).toEqual('peace.light.png');
+
+    new SphinxColorschemeImageHandler({auto: false});
+
+    // After SphinxColorschemeImageHandler is used,
+    // the image has switch to the dark theme version.
+    img = document.querySelector('img');
+    expect(img.getAttribute('src')).toEqual('peace.dark.png');
+
+    // Get the enclosing <figure>.
+    const anchor = document.querySelector('a');
+    expect(anchor.getAttribute('href')).toEqual('peace.dark.png');
+  });
+});
+
+
+// --------------------------------------------------------------------
+const template_4 = [
+  '<div>',
+  '  <figure class="align-right" id="id3">',
+  '    <a class="reference internal image-reference"',
+  '       href="peace.light.png">',
+  '      <img alt="An icon for peace"',
+  '           data-alt-src-color-scheme-dark="peace.dark.png"',
+  '           data-alt-src-color-scheme-light="peace.light.png"',
+  '           src="peace.light.png" width="200">',
+  '    </a>',
+  '    <figcaption>',
+  '      <p>',
+  '        <span class="caption-text">The caption of the figure.</span>',
+  '        <a class="headerlink" href="#id3" title="Link to this image">¶</a>',
+  '      </p>',
+  '    </figcaption>',
+  '  </figure>',
+  '</div>',
+];
+
+describe("Image's src and anchor's href changes in cs_figure", () => {
+  let fixtureEl;
+
+  beforeAll(() => {
+    fixtureEl = getFixture();
+
+    // Be sure that prefers-color-scheme matches when is 'dark'.
+    spyOn(globalThis, 'matchMedia').and.callFake(
+      (media_query) => {
+        const matches = media_query.includes('dark') ? true : false;
+        return {
+          matches,    // prefers-color-scheme: dark
+          addEventListener: (evt_name, evt_obj) => {},
+        };
+      }
+    );
+
+    // Be sure that the Image loads.
+    spyOn(globalThis, 'Image').and.callFake(
+      () => {
+        return {
+          src: '',
+          addEventListener: (evt_name, evt_cb) => {
+            if (evt_name === 'load') evt_cb();
+          }
+        }
+      }
+    );
+  });
+
+  afterEach(() => {
+    clearFixture();
+  });
+
+  it("Image's src and anchor's href changes in cs_figure", () => {
+    fixtureEl.innerHTML = template_4.join('');
 
     // When loading the template the 'src' attribute of
     // the image corresponds to the light version of it.
