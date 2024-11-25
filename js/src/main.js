@@ -69,7 +69,6 @@ export class SphinxColorschemeImageHandler {
       ) {
         const parent = img.parentElement;
         parent.href = img.getAttribute(data_att);
-        console.log("the new anchor's href:", parent.href);
       }
     }
   }
