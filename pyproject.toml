@@ -34,7 +34,7 @@ docs = [
     "myst-parser >=4.0.0, <4.1",
     "sphinx-design >=0.6.1, <0.7",
     "sphinx_copybutton >=0.5.2, <1.0.0",
-    "sphinx-nefertiti >=0.4",
+    "sphinx-nefertiti >=0.5",
 ]
 
 [tool.setuptools]
