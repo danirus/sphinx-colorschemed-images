@@ -1,6 +1,6 @@
 {
   "name": "sphinx-colorschemed-images",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Include color-scheme aware images in Sphinx projects.",
   "repository": {
     "type": "git",

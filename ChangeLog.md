@@ -1,4 +1,8 @@
-# Change Log
+# Release Notes
+
+## [0.2.0] - 2024-11-25
+
+- Remove unnecessary `console.log`.
 
 ## [0.1.4] - 2024-11-21
 
