@@ -1,5 +1,9 @@
 # Release Notes
 
+## [0.2.2] - 2024-11-26
+
+- Fix: prevent calling method `report_messages` if `HTML5Translator` does not have it. It is here for compat reasons.
+
 ## [0.2.1] - 2024-11-26
 
 - Fix: destination directory was not properly referred to when copying images.

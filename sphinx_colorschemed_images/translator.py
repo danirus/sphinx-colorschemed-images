@@ -245,7 +245,7 @@ def visit_colorschemed_image(self, node):
             atts["alt"] = alt
             element = self.emptytag(node, "img", suffix, src=uri, **atts)
         self.body.append(element)
-        if suffix:  # block-element
+        if suffix and getattr(self, "report_messages", None):  # block-element
             self.report_messages(node)
 
     # -----------------------------------------------------
