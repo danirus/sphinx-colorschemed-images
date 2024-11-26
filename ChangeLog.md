@@ -1,5 +1,9 @@
 # Release Notes
 
+## [0.2.1] - 2024-11-26
+
+- Fix: destination directory was not properly referred to when copying images.
+
 ## [0.2.0] - 2024-11-25
 
 - Remove unnecessary `console.log`.

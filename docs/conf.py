@@ -41,9 +41,9 @@ language = "en"
 
 today_fmt = '%A %d. %B %Y, %H:%M'
 
-html_theme = "sphinx_nefertiti"
-
 html_theme = 'sphinx_nefertiti'
+html_style = ["custom.css"]
+
 html_static_path = ['static']
 html_favicon = "static/diamond-half.svg"
 
@@ -69,6 +69,17 @@ html_theme_options = {
     "versions": [
         ("v%s" % item, release_pattern_url.format(release=item))
         for item in releases
+    ],
+
+    "header_links": [
+        {
+            "text": "Home",
+            "link": "index",
+        },
+        {
+            "text": "Release Notes",
+            "link": "release-notes",
+        }
     ],
 
     "footer_links": [
