@@ -183,7 +183,7 @@ def copy_colorschemed_images(app, *args):
 
     images = dict(app.env.colorschemed_images)
     images_dir = Path(app.builder.imagedir)
-    ensuredir(images_dir)
+    ensuredir(app.outdir / images_dir)
     stringify_func = ImageAdapter(app.env).get_original_image_uri
 
     for src in status_iterator(
@@ -194,7 +194,6 @@ def copy_colorschemed_images(app, *args):
         app.verbosity,
         stringify_func=stringify_func,
     ):
-        # import ipdb; ipdb.set_trace()
         dest = images[src]
         try:
             copyfile(

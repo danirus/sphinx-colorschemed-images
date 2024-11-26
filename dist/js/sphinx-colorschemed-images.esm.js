@@ -1,5 +1,5 @@
 /*!
-  * sphinx-colorschemed-images v0.1.3 (https://github.com/danirus/sphinx-colorschemed-images).
+  * sphinx-colorschemed-images v0.2.1 (https://github.com/danirus/sphinx-colorschemed-images).
   * Copyright 2024 Daniela Rus Morales.
   * Licensed under MIT (https://github.com/danirus/sphinx-colorschemed-images/blob/main/LICENSE).
   */
@@ -66,7 +66,6 @@ var SphinxColorschemeImageHandler = function SphinxColorschemeImageHandler(optio
       } else if (img.parentElement.tagName == "A" && img.parentElement.getAttribute("href") !== new_src) {
         var parent = img.parentElement;
         parent.href = img.getAttribute(data_att);
-        console.log("the new anchor's href:", parent.href);
       }
     };
     for (var _iterator = _createForOfIteratorHelperLoose(images), _step; !(_step = _iterator()).done;) {

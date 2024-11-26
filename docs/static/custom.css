@@ -1,0 +1,4 @@
+html.dark {
+  --sd-color-tabs-overline: rgba(173, 181, 189, 0.175);
+  --sd-color-tabs-underline: rgba(173, 181, 189, 0.175);
+}

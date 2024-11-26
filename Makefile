@@ -32,6 +32,10 @@ build-docs:  ## Create sphinx-colorschemed-images documentation.
 	make -C docs clean
 	make -C docs html
 
+debug-docs:  ## Create sphinx-colorschemed-images docs with debug enabled.
+	make -C docs clean
+	python debug_sphinx.py docs docs/_build -T
+
 serve-lcov:  js-tests  ## Web server for content from lcov-report directory.
 	python -m http.server -d js/coverage/lcov-report 8193
 
