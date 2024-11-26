@@ -16,8 +16,11 @@ release_pattern_url = (
     "https://sphinx-colorschemed-images.readthedocs.io/{release}/"
 )
 
+version = ".".join(sphinx_colorschemed_images.__version__.split(".")[:2])
 release = sphinx_colorschemed_images.__version__
-releases = [release,]
+releases = [
+    release,
+]
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -65,11 +68,11 @@ html_theme_options = {
     "repository_url": "https://github.com/danirus/sphinx-colorschemed-images",
     "repository_name": "sphinx-colorschemed-images",
 
-    # "current_version": f"v{release}",
-    # "versions": [
-    #     ("v%s" % item, release_pattern_url.format(release=item))
-    #     for item in releases
-    # ],
+    "current_version": f"v{release}",
+    "versions": [
+        ("v%s" % item, release_pattern_url.format(release=item))
+        for item in releases
+    ],
 
     "header_links": [
         {
