@@ -12,9 +12,7 @@ project = 'sphinx-colorschemed-images'
 copyright = '2024, Daniela Rus Morales'
 author = 'Daniela Rus Morales'
 
-release_pattern_url = (
-    "https://sphinx-colorschemed-images.readthedocs.io/{release}/"
-)
+docs_url = "https://sphinx-colorschemed-images.readthedocs.io/{release}/"
 
 version = ".".join(sphinx_colorschemed_images.__version__.split(".")[:2])
 release = sphinx_colorschemed_images.__version__
@@ -69,10 +67,9 @@ html_theme_options = {
     "repository_url": "https://github.com/danirus/sphinx-colorschemed-images",
     "repository_name": "sphinx-colorschemed-images",
 
-    "current_version": f"v{release}",
+    "current_version": release,
     "versions": [
-        ("v%s" % item, release_pattern_url.format(release=item))
-        for item in releases
+        (item, docs_url.format(release=item)) for item in releases
     ],
 
     "header_links": [
