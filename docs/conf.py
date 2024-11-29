@@ -19,6 +19,7 @@ release_pattern_url = (
 version = ".".join(sphinx_colorschemed_images.__version__.split(".")[:2])
 release = sphinx_colorschemed_images.__version__
 releases = [
+    "latest",
     release,
 ]
 
