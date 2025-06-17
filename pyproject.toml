@@ -35,7 +35,7 @@ docs = [
     "sphinx-design >=0.6.1, <0.7",
     "sphinx-colorschemed-images >= 0.2.2",
     "sphinx_copybutton >=0.5.2, <1.0.0",
-    "sphinx-nefertiti >=0.7.3",
+    "sphinx-nefertiti >=0.8.2",
 ]
 
 [tool.setuptools]

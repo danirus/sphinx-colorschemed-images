@@ -50,10 +50,7 @@ html_static_path = ['static']
 html_favicon = "static/diamond-half.svg"
 
 html_theme_options = {
-    "documentation_font": "Open Sans",
-    "documentation_font_size": "1.0rem",
-    "monospace_font": "Ubuntu Mono",
-    "monospace_font_size": "1.1rem",
+    "monospace_font_size": ".90rem",
 
     "style": "purple",
     "pygments_light_style": "pastie",
