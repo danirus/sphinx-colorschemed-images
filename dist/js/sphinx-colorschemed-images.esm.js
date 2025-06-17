@@ -1,6 +1,6 @@
 /*!
-  * sphinx-colorschemed-images v0.2.1 (https://github.com/danirus/sphinx-colorschemed-images).
-  * Copyright 2024 Daniela Rus Morales.
+  * sphinx-colorschemed-images v0.2.2 (https://github.com/danirus/sphinx-colorschemed-images).
+  * Copyright 2025 Daniela Rus Morales.
   * Licensed under MIT (https://github.com/danirus/sphinx-colorschemed-images/blob/main/LICENSE).
   */
 function _arrayLikeToArray(r, a) {

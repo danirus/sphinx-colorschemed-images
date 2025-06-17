@@ -1,5 +1,9 @@
 # Release Notes
 
+## [0.2.3] - 2025-06-17
+
+- Skip copying light/dark images when the Sphinx builder will not use them, which is the case for builders: epub, gettext, latex, linkcheck, man, pseudoxml, texinfo, text, xml.
+
 ## [0.2.2] - 2024-11-26
 
 - Fix: prevent calling method `report_messages` if `HTML5Translator` does not have it. It is here for compat reasons.

@@ -178,7 +178,18 @@ def collect_candidates(env, img_path, node):
 
 def copy_colorschemed_images(app, *args):
     """Copy colorschemed_images that were not copied by the HTML Builder."""
-    if not hasattr(app.env, "colorschemed_images"):
+    _skip = [  # Skip this Sphinx builders.
+        "epub",
+        "gettext",
+        "latex",
+        "linkcheck",
+        "man",
+        "pseudoxml",
+        "texinfo",
+        "text",
+        "xml",
+    ]
+    if not hasattr(app.env, "colorschemed_images") or app.builder.name in _skip:
         return
 
     images = dict(app.env.colorschemed_images)
