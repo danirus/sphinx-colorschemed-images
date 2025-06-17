@@ -6,7 +6,24 @@ build-backend = "setuptools.build_meta"
 authors = [
     {name = "Daniela Rus Morales", email = "danirus@eml.cc"}
 ]
-classifiers = ["License :: OSI Approved :: MIT License"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Theme",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Documentation",
+]
 dependencies = ["sphinx >=6,<9"]
 description = "A Sphinx extension to add support for colorschemed images."
 dynamic = ["version"]
