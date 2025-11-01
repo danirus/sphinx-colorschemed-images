@@ -9,7 +9,7 @@ import sphinx_colorschemed_images
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'sphinx-colorschemed-images'
-copyright = '2024, Daniela Rus Morales'
+copyright = '2025, Daniela Rus Morales'
 author = 'Daniela Rus Morales'
 
 docs_url = "https://sphinx-colorschemed-images.readthedocs.io/{release}/"
@@ -50,7 +50,7 @@ html_static_path = ['static']
 html_favicon = "static/diamond-half.svg"
 
 html_theme_options = {
-    "monospace_font_size": ".90rem",
+    "documentation_font_size": "1.1rem",
 
     "style": "purple",
     "pygments_light_style": "pastie",
