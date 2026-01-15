@@ -50,6 +50,7 @@ html_static_path = ['static']
 html_favicon = "static/diamond-half.svg"
 
 html_theme_options = {
+    "monospace_font_size": "1.0rem",
     "documentation_font_size": "1.1rem",
 
     "style": "purple",
