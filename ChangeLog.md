@@ -1,5 +1,9 @@
 # Release Notes
 
+## [0.3.0] - 2026-01-15
+
+- Supports Sphinx 9.1.
+
 ## [0.2.3] - 2025-06-17
 
 - Skip copying light/dark images when the Sphinx builder will not use them, which is the case for builders: epub, gettext, latex, linkcheck, man, pseudoxml, texinfo, text, xml.
