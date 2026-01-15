@@ -4,7 +4,7 @@
   "description": "Include color-scheme aware images in Sphinx projects.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/danirus/sphinx-colorschemed-images"
+    "url": "git+https://github.com/danirus/sphinx-colorschemed-images.git"
   },
   "engines": {
     "node": ">=20"
